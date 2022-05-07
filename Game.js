@@ -11,6 +11,7 @@ class Game{
         this.WaveCount = 0;
         this.WaveTick = 0;
         this.NextWaveTick = 60 * 120; // из предположения что в секунду произойдет 60 тиков
+        this.PlayerHealth = 20;
         this.map = map;
     }
 
