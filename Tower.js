@@ -1,8 +1,9 @@
-//export default class Tower{
-class Tower {
-    constructor(damage=1, radius=25, position={X:0, Y: 0}) {
+import Enemy from "./Enemy";
+export default class Tower{
+    constructor(damage=1, radius=5, attackRadius = 25, position={X:0, Y: 0}) {
         this.damage = damage;
-        this.attackRadius = radius;
+        this.radius = radius;
+        this.attackRadius = attackRadius;
         this.position = position;
     };
 
@@ -13,6 +14,7 @@ class Tower {
         for (let enemy of enemies) {
             if (this.IsInAttackRadius(enemy)){
                 //TODO shoot, damage
+                enemy.TakeDamage(this.damage)
             }
         }
     }
@@ -29,21 +31,6 @@ class Tower {
 
     IsInAttackRadius(enemy) {
         return Math.sqrt((enemy.position.X - this.position.X)**2 + (enemy.position.Y - this.position.Y)**2) < this.attackRadius;
-    }
-}
-
-class Enemy {
-    hp = 10;
-    position = {X:0, Y:0}
-
-    SetPosition(x, y) {
-        this.position = {X:x, Y: y}
-    }
-
-    TakeDamage(damage) {
-        this.hp -= damage;
-        if (this.hp < 0)
-            this.hp = 0;
     }
 }
 
