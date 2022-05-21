@@ -58,13 +58,14 @@ class Game {
     GameTick() {
         if(this.WaveTick >= this.NextWaveTick)
             this.StartWave();
-                                                    //TODO
+                                                    // TODO call towers tick, enemy tick, projectile tick
         this.WaveTick++;
     }
 
     StartWave() {
         this.WaveTick = 0;
-                                                    // TODO
+        this.WaveCount++;
+                                                    // TODO add Enemy
     }
 }
 
