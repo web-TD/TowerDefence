@@ -6,6 +6,7 @@ class Game{
         this.Money = 0;
         this.Towers = [];
         this.Enemys = [];
+        this.Projectile = []
         this.GlobalUpgrades = [];
         this.TowersStore = [];
         this.WaveCount = 0;
@@ -16,7 +17,9 @@ class Game{
     }
 
     IsCanBayTower(TowerType){}
-    IsCanPlaceTower(point, TowerType){}
+    IsCanPlaceTower(point, TowerType){
+
+    }
     PlaceTower(point, TowerType){}
     IsCanUpgradeTower(TowerId, UpgradeId){}
     UpgradeTower(TowerId, UpgradeId){}

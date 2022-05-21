@@ -1,8 +1,11 @@
 class Map{
-    constructor(width = 640, high = 480, enemyPath = [{X:0, Y:0}, {X:640, Y:480}]) {
+    constructor(width = 1920, high = 1080,
+                enemyPath = [{X:0, Y:0}, {X:1920, Y:1080}],
+                pathRadius = 20) {
         this.width = width;
         this.hidh = high;
         this.enemyPath = enemyPath;
+        this.pathRadius = pathRadius;
     }
 
     getDistanceToPath(point){
