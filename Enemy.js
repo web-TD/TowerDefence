@@ -1,9 +1,10 @@
 export default class Enemy {
-    constructor(target, health=10, position={X:0, Y: 0}, speed = 1) {
+    constructor(target, health=10, position={X:0, Y: 0}, speed = 1, radius = 5) {
         this.health = health;
         this.position = position;
         this.speed = speed;
         this.target = target;
+        this.radius = radius;
     };
 
     static img = 'enemy.jpeg';
