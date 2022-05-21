@@ -1,6 +1,8 @@
 /*import Map from './Map.js'
 import Tower from './Tower.js'*/
 
+const TowerRadius = 10;
+
 class Game {
     constructor(map) {
         this.Money = 0;
@@ -18,12 +20,20 @@ class Game {
     }
 
     CanBuyTower(TowerType) {
+        return this.Money >= this.TowersStore[TowerType].Cost;
     }
 
     CanPlaceTower(point, TowerType) {
+        return this.map.getDistanceToPath(point) >= this.map.pathRadius + TowerRadius;
     }
 
     PlaceTower(point, TowerType) {
+        if(this.CanPlaceTower(point, TowerType) && this.CanBuyTower(TowerType)){
+            this.Towers.push(this.TowersStore[TowerType](point));
+            this.Money -= this.TowersStore[TowerType].Cost;
+            return true;
+        }
+        return false;
     }
 
     CanUpgradeTower(TowerId, UpgradeId) {
@@ -39,8 +49,14 @@ class Game {
     }
 
     GameTick() {
+        if(this.WaveTick >= this.NextWaveTick)
+            this.StartWave();
+                                                    //TODO
+        this.WaveTick++;
     }
 
     StartWave() {
+        this.WaveTick = 0;
+                                                    // TODO
     }
 }
