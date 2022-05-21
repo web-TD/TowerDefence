@@ -11,7 +11,6 @@ class Game {
         this.Projectile = []
         this.Enemies = [];
         this.GlobalUpgrades = [];
-        this.TowersStore = [];
         this.WaveCount = 0;
         this.WaveTick = 0;
         this.NextWaveTick = 60 * 120; // из предположения что в секунду произойдет 60 тиков
@@ -20,17 +19,25 @@ class Game {
     }
 
     CanBuyTower(TowerType) {
-        return this.Money >= this.TowersStore[TowerType].Cost;
+        return this.Money >= TowerType.Cost;
     }
 
     CanPlaceTower(point, TowerType) {
-        return this.map.getDistanceToPath(point) >= this.map.pathRadius + TowerRadius;
+        let fl1 =  this.map.getDistanceToPath(point) >= this.map.pathRadius + TowerRadius;
+        let fl2 = true;
+        for(let tower in this.Towers){
+            if(getDistance(point, tower.position) < TowerType.Radius + tower.Radius){
+                fl2 = false;
+                break;
+            }
+        }
+        return fl1 && fl2;
     }
 
     PlaceTower(point, TowerType) {
         if(this.CanPlaceTower(point, TowerType) && this.CanBuyTower(TowerType)){
-            this.Towers.push(this.TowersStore[TowerType](point));
-            this.Money -= this.TowersStore[TowerType].Cost;
+            this.Towers.push(TowerType.constructor(point));
+            this.Money -= TowerType.Cost;
             return true;
         }
         return false;
@@ -59,4 +66,8 @@ class Game {
         this.WaveTick = 0;
                                                     // TODO
     }
+}
+
+function getDistance(p1, p2){
+    return (p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y);
 }
