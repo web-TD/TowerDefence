@@ -1,11 +1,11 @@
-import Map from './MapScipt'
-import Tower from './TowerScript'
+/*import Map from './Map.js'
+import Tower from './Tower.js'*/
 
-class Game{
+class Game {
     constructor(map) {
         this.Money = 0;
         this.Towers = [];
-        this.Enemys = [];
+        this.Enemies = [];
         this.GlobalUpgrades = [];
         this.TowersStore = [];
         this.WaveCount = 0;
@@ -15,15 +15,30 @@ class Game{
         this.map = map;
     }
 
-    IsCanBayTower(TowerType){}
-    IsCanPlaceTower(point, TowerType){}
-    PlaceTower(point, TowerType){}
-    IsCanUpgradeTower(TowerId, UpgradeId){}
-    UpgradeTower(TowerId, UpgradeId){}
+    CanBuyTower(TowerType) {
+    }
 
-    IsCanGlobalUpgrade(UpgradeId){}
-    GlobalUpgrade(UpgradeId){}
+    CanPlaceTower(point, TowerType) {
+    }
 
-    GameTick(){}
-    StartWave(){}
+    PlaceTower(point, TowerType) {
+    }
+
+    CanUpgradeTower(TowerId, UpgradeId) {
+    }
+
+    UpgradeTower(TowerId, UpgradeId) {
+    }
+
+    CanGlobalUpgrade(UpgradeId) {
+    }
+
+    GlobalUpgrade(UpgradeId) {
+    }
+
+    GameTick() {
+    }
+
+    StartWave() {
+    }
 }
