@@ -1,5 +1,6 @@
-import Enemy from "./Enemy";
-export default class Tower{
+import Enemy from "./Enemy.js";
+
+class Tower{
     constructor(damage=1, radius=5, attackRadius = 25, position={X:0, Y: 0}) {
         this.damage = damage;
         this.radius = radius;
@@ -34,7 +35,7 @@ export default class Tower{
     }
 }
 
-class Laser extends Tower {
+export class Laser extends Tower {
     constructor(position) {
         super(2, 25, position);
         this.img = 'laser.jpeg';
@@ -44,7 +45,7 @@ class Laser extends Tower {
     static shopImg = 'laser_shop.jpeg';
 }
 
-class Turret extends Tower {
+export class Turret extends Tower {
     constructor(position) {
         super(1, 50, position);
         this.img = 'turret.jpeg';
@@ -54,7 +55,7 @@ class Turret extends Tower {
     static shopImg = 'turret_shop.jpeg';
 }
 
-class MegaImba extends Tower {
+export class MegaImba extends Tower {
     constructor(position) {
         super(100, 1000, position);
         this.img = 'artemiy.jpeg';

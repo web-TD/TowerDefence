@@ -1,7 +1,7 @@
 class Map{
     constructor(
         width = 1920,
-        high = 1080,
+        height = 1080,
         enemyPath = [{X:0, Y:0}, {X:1920, Y:1080}],
         pathRadius = 20) {
         this.width = width;
