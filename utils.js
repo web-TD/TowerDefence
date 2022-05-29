@@ -1,8 +1,11 @@
 export let CONFIG = await fetch('controllers/cfg.json').then(res => res.json());
 
-export function stackElements(parentNode, count, tag, clsPrefix, text) {
+export function stackElements(parentNode, count, tag, clsPrefix, text, isReversed) {
     let elements = []
-    for (let i = count - 1; i >= 0; i--) {
+    let indexes = Array.from(Array(count).keys());
+    if (isReversed)
+        indexes.reverse();
+    for (let i of indexes) {
         let el = getElement(parentNode, tag, `${clsPrefix}${i}`);
         if (text !== undefined) {
             let h = document.createElement("h1");

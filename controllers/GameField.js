@@ -1,4 +1,4 @@
-import {getElement, getTextSize} from "../utils.js";
+import {getElement} from "../utils.js";
 
 export default class GameField {
     constructor(width, height, game) {
@@ -10,6 +10,7 @@ export default class GameField {
         this.context = this.canvas.getContext("2d");
         document.body.appendChild(this.canvas);
         this.game = game;
+        this.initGameField();
     }
 
     drawGameField() {
@@ -17,7 +18,7 @@ export default class GameField {
         this.drawMapElements(this.game.Towers);
         this.drawMapElements(this.game.Enemies);
         this.drawMapElements(this.game.Bullets);
-        this.drawData();
+        this.updateData();
     }
 
     drawMapElements(elements) {
@@ -37,8 +38,7 @@ export default class GameField {
         this.context.restore();
     }
 
-    drawData(){
-        this.context.font = `32px Arial`;
+    updateData(){
         this.fillHealth(this.game.PlayerHealth);
         this.fillWaves(this.game.WaveCount);
         this.fillMoney(this.game.Money);
@@ -46,25 +46,39 @@ export default class GameField {
     }
 
     fillHealth(health) {
-        let healthInfo = `Health: ${health}`;
-        let size = getTextSize(this.context, healthInfo);
-        this.context.fillText(healthInfo, 10, size.h + 10);
+        this.health.firstChild.textContent = `Health: ${health}`;
     }
 
     fillWaves(waves) {
-        let wavesInfo = `Waves: ${waves}`;
-        let size = getTextSize(this.context, wavesInfo)
-        this.context.fillText(wavesInfo, this.canvas.width - size.w - 10, size.h + 10);
+        this.waves.firstChild.textContent = `Waves: ${waves}`;
     }
 
     fillMoney(amount) {
-        let moneyInfo = `Money: ${amount}`;
-        this.context.fillText(moneyInfo, 10, this.canvas.height - 10);
+        this.money.firstChild.textContent = `Money: ${amount}`;
     }
 
     fillTime(time) { /* TODO(Cockamamie): Add timer */
-        let timeInfo = `Time: ${time}`;
-        let size = getTextSize(this.context, timeInfo);
-        this.context.fillText(timeInfo, this.canvas.width - size.w - 10, this.canvas.height - 10);
+        this.time.firstChild.textContent = `Time: ${time}`;
+    }
+
+    addText(parentNode) {
+        let h = document.createElement("h1");
+        let node = document.createTextNode('');
+        h.appendChild(node);
+        parentNode.appendChild(h);
+    }
+
+    initGameField() {
+        this.gameField = getElement(document.body, 'div', 'game-field');
+        let gameData = getElement(this.gameField, 'div', 'data');
+        this.health = getElement(gameData, 'div', `health`);
+        this.waves = getElement(gameData, 'div', `waves`);
+        this.money = getElement(gameData, 'div', `money`);
+        this.time = getElement(gameData, 'div', `time`);
+        this.addText(this.health);
+        this.addText(this.waves);
+        this.addText(this.money);
+        this.addText(this.time);
+
     }
 }

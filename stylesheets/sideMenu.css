@@ -1,6 +1,7 @@
 :root .side-menu {
     --side-indent: 4.65%;
     --button-radius: 10px;
+    --vert-indent: 2.8%;
 }
 
 .side-menu {

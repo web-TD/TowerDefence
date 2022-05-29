@@ -59,8 +59,8 @@ export default class SideMenu {
             stackElements(buyBtnRects, this.stackCount, 'div', 'buy-rect');
             stackElements(towerInfoRects, this.stackCount, 'div', 'tower-info-rect');
             stackElements(towerCostRects, this.stackCount, 'div', 'tower-cost-rect');
-            stackElements(towerInfos, this.stackCount, 'div', 'tower-info', item.name);
-            stackElements(towerCosts, this.stackCount, 'div', 'tower-cost', item.cost);
+            stackElements(towerInfos, this.stackCount, 'div', 'tower-info', item.name, true);
+            stackElements(towerCosts, this.stackCount, 'div', 'tower-cost', item.cost, true);
         }
     }
 
@@ -74,8 +74,8 @@ export default class SideMenu {
         let restartText = getElement(controlButtons, 'div', 'control-texts', 'restart-texts');
         stackElements(pauseRects, this.stackCount, 'div', 'control-rect');
         stackElements(restartRects, this.stackCount, 'div', 'control-rect');
-        let pauseTexts = stackElements(pauseText, this.stackCount, 'div', 'control-text', 'Pause');
-        let restartTexts = stackElements(restartText, this.stackCount, 'div', 'control-text', 'Restart');
+        let pauseTexts = stackElements(pauseText, this.stackCount, 'div', 'control-text', 'Pause', true);
+        let restartTexts = stackElements(restartText, this.stackCount, 'div', 'control-text', 'Restart', true);
         for (let i = 0; i < this.stackCount; i++) {
             pauseTexts[i].setAttribute('id', `pause-text${i}`);
             restartTexts[i].setAttribute('id', `restart-text${i}`);
