@@ -8,15 +8,19 @@ export function stackElements(parentNode, count, tag, clsPrefix, text, isReverse
     for (let i of indexes) {
         let el = getElement(parentNode, tag, `${clsPrefix}${i}`);
         if (text !== undefined) {
-            let h = document.createElement("h1");
-            let node = document.createTextNode(text);
-            h.appendChild(node);
-            el.appendChild(h);
+            addText(el, text);
         }
         elements.push(el);
     }
     elements.reverse()
     return elements;
+}
+
+export function addText(parentNode, text) {
+    let h = document.createElement("h1");
+    let node = document.createTextNode(text);
+    h.appendChild(node);
+    parentNode.appendChild(h);
 }
 
 export function getElement(parentNode, tag, cls, id) {

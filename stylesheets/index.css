@@ -4,7 +4,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background:rgba(0, 0, 0, 0.2);
+    background:rgba(0, 0, 0, 0.4);
     z-index: 99;
 }
 
@@ -25,6 +25,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    -webkit-text-stroke-width: 0.8px;
+    -webkit-text-stroke-color: #FFFFFF;
+}
+
+#resume > h1 , #exit > h1 {
+    text-align: center;
+    font-family: Videophreak, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    -webkit-text-fill-color: transparent;
 }
 
 #resume {top: 40%}

@@ -1,3 +1,5 @@
+import {addText} from "../utils.js";
+
 export default class PauseMenu {
     constructor(game) {
         this.game = game;
@@ -46,7 +48,7 @@ export default class PauseMenu {
     getButton(id, text, onClick) {
         let btn = document.createElement('div');
         btn.setAttribute('id', id);
-        btn.textContent = text;
+        addText(btn, text);
         btn.addEventListener('click', onClick);
         btn.style.visibility = 'hidden';
         this.pauseMenu.appendChild(btn);

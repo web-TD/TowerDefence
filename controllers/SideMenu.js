@@ -89,6 +89,7 @@ export default class SideMenu {
     }
 
     buy () {
+        alert("buy");
         // todo implement
     }
 
@@ -108,6 +109,7 @@ export default class SideMenu {
 
     restart() {
         alert("restart");
+        //todo implement
     }
 
     pause() {
