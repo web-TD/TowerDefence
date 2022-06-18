@@ -1,20 +1,20 @@
-/*import Map from './Map.js'
-import Tower from './Tower.js'*/
+import Map from './Map.js'
+import Enemy from "./Enemy.js";
 
 const TowerRadius = 10;
 
 export default class Game {
-    constructor(map) {
+    constructor(lvl) {
         this.SetDefault();
-        this.map = map;
+        this.lvl = lvl;
+        this.map = new Map(lvl);
     }
 
     SetDefault(){
         this.Money = 0;
         this.Towers = [];
-        this.Projectile = []
-        this.Enemies = [];
         this.Bullets = [];
+        this.Enemies = [];
         this.GlobalUpgrades = [];
         this.WaveCount = 0;
         this.WaveTick = 0;
@@ -49,9 +49,16 @@ export default class Game {
     }
 
     CanUpgradeTower(TowerId, UpgradeId) {
+        return this.Money >= this.Towers[TowerId].upgrades[UpgradeId].Cost();
     }
 
     UpgradeTower(TowerId, UpgradeId) {
+        if(this.CanUpgradeTower(TowerId, UpgradeId)){
+            this.Money -= this.Towers[TowerId].upgrades[UpgradeId].Cost();
+            this.Towers[TowerId].upgrades[UpgradeId].LvlUp();
+            return true;
+        }
+        return false;
     }
 
     CanGlobalUpgrade(UpgradeId) {
@@ -63,14 +70,26 @@ export default class Game {
     GameTick() {
         if(this.WaveTick >= this.NextWaveTick)
             this.StartWave();
-                                                    // TODO call towers tick, enemy tick, projectile tick
+        for(let tower in this.Towers)
+            tower.Tick();
+        for(let bullet in this.Bullets)
+            bullet.Move();
+        for(let enemy in this.Enemies)
+            if(enemy.Move()){
+                if(this.map.enemyPath.length - 1 === enemy.targetId){
+                    this.PlayerHealth--;
+                    enemy.Die();
+                }else{
+                    enemy.SetTarget(this.map.enemyPath[enemy.targetId + 1]);
+                }
+            }
         this.WaveTick++;
     }
 
     StartWave() {
         this.WaveTick = 0;
         this.WaveCount++;
-                                                    // TODO add Enemy
+        // TODO add Enemy
     }
 
     togglePause() {
