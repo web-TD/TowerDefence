@@ -1,18 +1,20 @@
-/*import Map from './Map.js'
-import Tower from './Tower.js'*/
+import Map from './Map.js'
+import {DATA} from "../utils.js";
+import Enemy from "./Enemy.js";
 
-class Game {
-    constructor(map) {
+export default class Game {
+    constructor(lvl) {
         this.Money = 0;
         this.Towers = [];
-        this.Bullets = []
+        this.Bullets = [];
         this.Enemies = [];
         this.GlobalUpgrades = [];
         this.WaveCount = 0;
         this.WaveTick = 0;
         this.NextWaveTick = 60 * 120; // из предположения что в секунду произойдет 60 тиков
         this.PlayerHealth = 20;
-        this.map = map;
+        this.lvl = lvl;
+        this.map = new Map(lvl);
         this.isPaused = false;
     }
 

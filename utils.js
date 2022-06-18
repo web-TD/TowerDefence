@@ -1,4 +1,3 @@
-export let CONFIG = await fetch('controllers/cfg.json').then(res => res.json());
 
 export function stackElements(parentNode, count, tag, clsPrefix, text, isReversed) {
     let elements = []

@@ -1,5 +1,4 @@
-import Enemy from "./Enemy.js";
-import {DamageUpgrade, RadiusUpgrade, SpeedUpgrade} from "./Upgrade";
+import {DamageUpgrade, RadiusUpgrade, SpeedUpgrade} from "./Upgrade.js";
 
 class Tower{
     constructor(damage=1, radius=5, attackRadius = 25, attackSpeed = 10, position={X:0, Y: 0},) {
@@ -15,7 +14,9 @@ class Tower{
     img = 'img.jpeg';
     recharge = 40;
 
-    CreateBullet(); // TODO
+    CreateBullet() {
+        // TODO
+    }
 
     Attack(enemies) {
         for (let enemy of enemies) {

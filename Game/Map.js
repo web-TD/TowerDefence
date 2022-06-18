@@ -1,5 +1,6 @@
-class Map{
+export default class Map{
     constructor(
+        levelNumber,
         width = 1920,
         height = 1080,
         enemyPath = [{X:0, Y:0}, {X:1920, Y:1080}],
@@ -8,6 +9,7 @@ class Map{
         this.height = height;
         this.enemyPath = enemyPath;
         this.pathRadius = pathRadius;
+        this.img = `assets/level_maps/${levelNumber}.png`;
     }
 
     getDistanceToPath(point){
