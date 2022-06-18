@@ -5,6 +5,8 @@ export default class Enemy {
         this.speed = speed;
         this.target = target;
         this.radius = radius;
+        this.targetId = 0;
+        this.isLive = true
     };
 
     static img = 'enemy.jpeg';
@@ -18,11 +20,16 @@ export default class Enemy {
 
     SetTarget(target){
         this.target = target;
+        this.targetId++;
     }
 
     TakeDamage(damage) {
         this.health -= damage;
         if (this.health < 0)
             this.health = 0;
+    }
+
+    Die(){
+        this.isLive = false;
     }
 }

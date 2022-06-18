@@ -1,5 +1,4 @@
 import Map from './Map.js'
-import {DATA} from "../utils.js";
 import Enemy from "./Enemy.js";
 
 export default class Game {
@@ -70,14 +69,21 @@ export default class Game {
         for(let bullet in this.Bullets)
             bullet.Move();
         for(let enemy in this.Enemies)
-            enemy.Move();
+            if(enemy.Move()){
+                if(this.map.enemyPath.length - 1 === enemy.targetId){
+                    this.PlayerHealth--;
+                    enemy.Die();
+                }else{
+                    enemy.SetTarget(this.map.enemyPath[enemy.targetId + 1]);
+                }
+            }
         this.WaveTick++;
     }
 
     StartWave() {
         this.WaveTick = 0;
         this.WaveCount++;
-                                                    // TODO add Enemy
+        // TODO add Enemy
     }
 
     togglePause() {
