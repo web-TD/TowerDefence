@@ -68,7 +68,14 @@ class Game {
         for(let bullet in this.Bullets)
             bullet.Move();
         for(let enemy in this.Enemies)
-            enemy.Move();
+            if(enemy.Move()){
+                if(this.map.enemyPath.length - 1 === enemy.targetId){
+                    this.PlayerHealth--;
+                    enemy.Die();
+                }else{
+                    enemy.SetTarget(this.map.enemyPath[enemy.targetId + 1]);
+                }
+            }
         this.WaveTick++;
     }
 
