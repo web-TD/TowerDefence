@@ -5,9 +5,8 @@ class Game {
     constructor(map) {
         this.Money = 0;
         this.Towers = [];
-        this.Projectile = []
+        this.Bullets = []
         this.Enemies = [];
-        this.Bullets = [];
         this.GlobalUpgrades = [];
         this.WaveCount = 0;
         this.WaveTick = 0;
@@ -64,7 +63,12 @@ class Game {
     GameTick() {
         if(this.WaveTick >= this.NextWaveTick)
             this.StartWave();
-                                                    // TODO call towers tick, enemy tick, projectile tick
+        for(let tower in this.Towers)
+            tower.Tick();
+        for(let bullet in this.Bullets)
+            bullet.Move();
+        for(let enemy in this.Enemies)
+            enemy.Move();
         this.WaveTick++;
     }
 

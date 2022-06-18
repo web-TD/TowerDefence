@@ -41,6 +41,6 @@ export class SpeedUpgrade extends Upgrade{
     }
 
     addValue() {
-        this.tower.Upgrade(0, 0, 0.01);
+        this.tower.Upgrade(0, 0, 2);
     }
 }

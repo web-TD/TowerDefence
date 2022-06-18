@@ -2,26 +2,29 @@ import Enemy from "./Enemy.js";
 import {DamageUpgrade, RadiusUpgrade, SpeedUpgrade} from "./Upgrade";
 
 class Tower{
-    constructor(damage=1, radius=5, attackRadius = 25, attackSpeed = 0.1, position={X:0, Y: 0},
-    ) {
+    constructor(damage=1, radius=5, attackRadius = 25, attackSpeed = 10, position={X:0, Y: 0},) {
         this.damage = damage;
         this.radius = radius;
         this.attackRadius = attackRadius;
         this.position = position;
-        this.attackSpeed = attackSpeed; // выстрелов в тик
+        this.attackSpeed = attackSpeed; // выстрелов в тик / 1000
         this.upgrades = [DamageUpgrade(this), RadiusUpgrade(this), SpeedUpgrade(this)];
+        this.__cd = 1000; // для отслеживания кд выстрела
     };
 
     img = 'img.jpeg';
     recharge = 40;
 
+    CreateBullet(); // TODO
+
     Attack(enemies) {
         for (let enemy of enemies) {
             if (this.IsInAttackRadius(enemy)){
-                //TODO shoot, damage
-                enemy.TakeDamage(this.damage)
+                this.CreateBullet();
+                return true;
             }
         }
+        return false;
     }
 
     Upgrade(dmg, rds, spd) {
@@ -36,6 +39,15 @@ class Tower{
 
     IsInAttackRadius(enemy) {
         return Math.sqrt((enemy.position.X - this.position.X)**2 + (enemy.position.Y - this.position.Y)**2) < this.attackRadius;
+    }
+
+    Tick(enemies){
+        if(this.__cd < 1000)
+            this.__cd += this.attackSpeed;
+        if(this.__cd >= 1000){
+            if(this.Attack(enemies))
+                this.__cd -= 1000;
+        }
     }
 }
 
