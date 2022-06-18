@@ -1,11 +1,15 @@
 import Enemy from "./Enemy.js";
+import {DamageUpgrade, RadiusUpgrade, SpeedUpgrade} from "./Upgrade";
 
 class Tower{
-    constructor(damage=1, radius=5, attackRadius = 25, position={X:0, Y: 0}) {
+    constructor(damage=1, radius=5, attackRadius = 25, attackSpeed = 0.1, position={X:0, Y: 0},
+    ) {
         this.damage = damage;
         this.radius = radius;
         this.attackRadius = attackRadius;
         this.position = position;
+        this.attackSpeed = attackSpeed; // выстрелов в тик
+        this.upgrades = [DamageUpgrade(this), RadiusUpgrade(this), SpeedUpgrade(this)];
     };
 
     img = 'img.jpeg';
@@ -20,10 +24,10 @@ class Tower{
         }
     }
 
-    Upgrade(dmg, rds, hp) {
+    Upgrade(dmg, rds, spd) {
         this.damage += dmg;
         this.attackRadius += rds;
-        this.health += hp;
+        this.attackSpeed += spd;
     }
 
     SetPosition(x, y) {

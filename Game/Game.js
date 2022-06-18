@@ -1,8 +1,6 @@
 /*import Map from './Map.js'
 import Tower from './Tower.js'*/
 
-const TowerRadius = 10;
-
 class Game {
     constructor(map) {
         this.Money = 0;
@@ -45,9 +43,16 @@ class Game {
     }
 
     CanUpgradeTower(TowerId, UpgradeId) {
+        return this.Money >= this.Towers[TowerId].upgrades[UpgradeId].Cost();
     }
 
     UpgradeTower(TowerId, UpgradeId) {
+        if(this.CanUpgradeTower(TowerId, UpgradeId)){
+            this.Money -= this.Towers[TowerId].upgrades[UpgradeId].Cost();
+            this.Towers[TowerId].upgrades[UpgradeId].LvlUp();
+            return true;
+        }
+        return false;
     }
 
     CanGlobalUpgrade(UpgradeId) {

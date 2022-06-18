@@ -1,5 +1,5 @@
 import {getElement} from "../utils.js";
-import {Laser, Turret, MegaImba} from "../Tower.js";
+import {Laser, Turret, MegaImba} from "../Game/Tower.js";
 import {clearDiv, stackElements} from "../utils.js";
 import PauseMenu from "./PauseMenu.js";
 
