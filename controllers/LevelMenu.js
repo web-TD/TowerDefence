@@ -1,6 +1,7 @@
 import GameField from "./GameField.js";
 import SideMenu from "./SideMenu.js";
 import {getElement} from "../utils.js";
+import Game from "../Game.js";
 
 export default class LevelMenu {
     constructor() {
@@ -10,6 +11,7 @@ export default class LevelMenu {
     foo() {
         for (let i = 0; i < 5; i++) {
             let btn = document.createElement('button');
+            btn.innerText = `level ${i}`;
             btn.style.width = '500px';
             btn.style.height = '100px';
             btn.lvl = i;
@@ -20,7 +22,6 @@ export default class LevelMenu {
 
     startLevel(event) {
         let lvl = event.currentTarget.lvl;
-        this.levelMenu.style.visibility = 'hidden';
         let map = new Map(640, 480, [{X:0, Y:0}, {X:640, Y:0}, {X:640, Y:480}, {X:0, Y:480}]);
         let game = new Game(map);
         let gameField = new GameField(innerWidth * 0.7, innerHeight, game);
@@ -28,6 +29,6 @@ export default class LevelMenu {
         sideMenu.showSideMenu();
         setInterval(function () {
             gameField.drawGameField();
-        }, 10)
+        }, 10);
     }
 }

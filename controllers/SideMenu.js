@@ -9,6 +9,7 @@ export default class SideMenu {
         this.page = 0;
         this.pauseMenu = new PauseMenu(game);
         this.stackCount = 5;
+        this.game = game;
     }
 
     showSideMenu() {
@@ -108,8 +109,7 @@ export default class SideMenu {
     }
 
     restart() {
-        alert("restart");
-        //todo implement
+        this.game.SetDefault();
     }
 
     pause() {

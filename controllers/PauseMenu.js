@@ -1,4 +1,5 @@
-import {addText} from "../utils.js";
+import {addText, deleteDivByClassName, deleteDivByID} from "../utils.js";
+import LevelMenu from "./LevelMenu.js";
 
 export default class PauseMenu {
     constructor(game) {
@@ -42,7 +43,10 @@ export default class PauseMenu {
     }
 
     exit() {
-
+        deleteDivByClassName('game-field');
+        deleteDivByClassName('game-canvas');
+        deleteDivByClassName('side-menu');
+        deleteDivByID('pauseMenu');
     }
 
     getButton(id, text, onClick) {

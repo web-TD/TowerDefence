@@ -1,5 +1,3 @@
-export let CONFIG = await fetch('controllers/cfg.json').then(res => res.json());
-
 export function stackElements(parentNode, count, tag, clsPrefix, text, isReversed) {
     let elements = []
     let indexes = Array.from(Array(count).keys());
@@ -43,4 +41,14 @@ export function clearDiv(div) {
     while(div.firstChild) {
         div.removeChild(div.firstChild);
     }
+}
+
+export function deleteDivByClassName(classname){
+    let div = document.getElementsByClassName(classname)[0];
+    div.parentNode.removeChild(div);
+}
+
+export function deleteDivByID(id){
+    let div = document.getElementById(id);
+    div.parentNode.removeChild(div);
 }

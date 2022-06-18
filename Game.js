@@ -3,8 +3,13 @@ import Tower from './Tower.js'*/
 
 const TowerRadius = 10;
 
-class Game {
+export default class Game {
     constructor(map) {
+        this.SetDefault();
+        this.map = map;
+    }
+
+    SetDefault(){
         this.Money = 0;
         this.Towers = [];
         this.Projectile = []
@@ -15,7 +20,6 @@ class Game {
         this.WaveTick = 0;
         this.NextWaveTick = 60 * 120; // из предположения что в секунду произойдет 60 тиков
         this.PlayerHealth = 20;
-        this.map = map;
         this.isPaused = false;
     }
 
