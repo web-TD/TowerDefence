@@ -1,6 +1,6 @@
 import {getElement, deleteDivByID} from "../utils.js";
 import {Laser, Turret, MegaImba} from "../Game/Tower.js";
-import {clearDiv, stackElements} from "../utils.js";
+import {getButton, getElement, clearDiv, stackElements} from "../utils.js";
 import PauseMenu from "./PauseMenu.js";
 
 export default class SideMenu {
@@ -19,15 +19,15 @@ export default class SideMenu {
     }
 
     createShop() {
-        let towers = [Laser, Turret, MegaImba, Laser].sort((a, b) => {return a.cost - b.cost});
+        let towers = [Laser, Turret, MegaImba, Laser, Laser].sort((a, b) => {return a.cost - b.cost});
         this.createShopPage(towers);
         let pageButtons = getElement(this.sideMenu, 'div', 'pages');
-        let prevPageBtn = this.getButton(
+        let prevPageBtn = getButton(
             pageButtons,
             this.previousPage.bind(this),
             'page-buttons',
             'prev-page-button');
-        let nextPageBtn = this.getButton(
+        let nextPageBtn = getButton(
             pageButtons,
             this.nextPage.bind(this),
             'page-buttons',
@@ -51,7 +51,7 @@ export default class SideMenu {
         let shopRects = getElement(shop, 'div', 'shop-rects');
         for (let i = 0; i < pageItems.length; i++) {
             let item = pageItems[i];
-            let buyBtn = this.getButton(shop, this.buy.bind(this), 'buy-buttons', `buy-button${i}`);
+            let buyBtn = getButton(shop, this.buy.bind(this), 'buy-buttons', `buy-button${i}`);
             let buyBtnRects = getElement(shopRects, 'div', `buy-rects`, `buy-rects${i}`);
             let towerInfoRects = getElement(buyBtnRects, 'div', `tower-info-rects`);
             let towerCostRects = getElement(buyBtnRects, 'div', 'tower-cost-rects');
@@ -67,8 +67,8 @@ export default class SideMenu {
 
     createControlButtons() {
         let controlButtons = getElement(this.sideMenu, 'div', 'controls');
-        let pauseBtn = this.getButton(controlButtons, this.pause.bind(this), 'control-buttons', 'pause-button');
-        let restartBtn = this.getButton(controlButtons, this.restart.bind(this), 'control-buttons', 'restart-button');
+        let pauseBtn = getButton(controlButtons, this.pause.bind(this), 'control-buttons', 'pause-button');
+        let restartBtn = getButton(controlButtons, this.restart.bind(this), 'control-buttons', 'restart-button');
         let pauseRects = getElement(controlButtons, 'div', 'control-rects', 'pause-rects');
         let restartRects = getElement(controlButtons, 'div', 'control-rects', 'restart-rects');
         let pauseText = getElement(controlButtons, 'div', 'control-texts', 'pause-texts');

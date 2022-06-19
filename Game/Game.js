@@ -1,7 +1,26 @@
 import Map from './Map.js'
 import Enemy from "./Enemy.js";
+import {DefaultWave} from "./Wave.js";
 
 const TowerRadius = 10;
+
+const StandardWaves = [
+    new DefaultWave("1", 1),
+    new DefaultWave("2", 1),
+    new DefaultWave("3", 1.1),
+    new DefaultWave("4", 1.2),
+    new DefaultWave("5", 1.5),
+    new DefaultWave("6", 2),
+    new DefaultWave("7", 2),
+    new DefaultWave("8", 2),
+    new DefaultWave("9", 2),
+    new DefaultWave("10 Boss", 4),
+    new DefaultWave("11", 4),
+    new DefaultWave("12", 5),
+    new DefaultWave("13", 5),
+    new DefaultWave("14", 6),
+    new DefaultWave("15 Boss", 12),
+]
 
 export default class Game {
     constructor(lvl) {
@@ -13,14 +32,18 @@ export default class Game {
     SetDefault(){
         this.Money = 0;
         this.Towers = [];
-        this.Bullets = [];
-        this.Enemies = [];
+        this.Bullets = {};
+        this.Enemies = {};
         this.GlobalUpgrades = [];
+        this.Waves = StandardWaves;
         this.WaveCount = 0;
         this.WaveTick = 0;
         this.NextWaveTick = 60 * 120; // из предположения что в секунду произойдет 60 тиков
         this.PlayerHealth = 20;
         this.isPaused = false;
+        this.__usedEnemyId = 0;
+        this.__waveEnemyId = 0;
+        this.__bulletId = 0;
     }
 
     CanBuyTower(TowerType) {
@@ -70,26 +93,83 @@ export default class Game {
     GameTick() {
         if(this.WaveTick >= this.NextWaveTick)
             this.StartWave();
-        for(let tower in this.Towers)
-            tower.Tick();
-        for(let bullet in this.Bullets)
-            bullet.Move();
-        for(let enemy in this.Enemies)
-            if(enemy.Move()){
-                if(this.map.enemyPath.length - 1 === enemy.targetId){
-                    this.PlayerHealth--;
-                    enemy.Die();
-                }else{
-                    enemy.SetTarget(this.map.enemyPath[enemy.targetId + 1]);
+        this.MoveEnemies();
+
+        let bulletToClear = []
+        for(let bulletId in this.Bullets)
+            if(this.Bullets[bulletId].Move()){
+                bulletToClear.push(bulletId);
+            }else{
+                for(let enemyId in this.Enemies){
+                    if(getDistance(this.Bullets[bulletId].position, this.Enemies[enemyId].position)
+                        < this.Enemies[enemyId].radius){
+                        bulletToClear.push(bulletId);
+                        this.Enemies[enemyId].TakeDamage(this.Bullets[bulletId].damage);
+                    }
                 }
             }
+        for(let id in bulletToClear)
+            delete this.Bullets[id];
+
+        this.ClearEnemies();
+        this.SpawnEnemy();
+        let enemies = [];
+        for(let id in this.Enemies)
+            enemies.push(this.Enemies[id]);
+        for(let tower in this.Towers) {
+            let bullet = tower.Tick(enemies);
+            if(bullet !== null) {
+                this.Bullets[this.__bulletId] = bullet;
+                this.__bulletId++;
+            }
+        }
         this.WaveTick++;
     }
 
+    ClearEnemies(){
+        let enemiesToClear = [];
+        for(let enemyId in this.Enemies)
+            if(!this.Enemies[enemyId].isLive) {
+                enemiesToClear.push(enemyId);
+            }
+        for(let id in enemiesToClear)
+            delete this.Enemies[id];
+    }
+
+    MoveEnemies(){
+        for(let enemyId in this.Enemies)
+            if (this.Enemies[enemyId].Move()) {
+                if (this.map.enemyPath.length - 1 === this.Enemies[enemyId].targetId) {
+                    this.PlayerHealth--;
+                    this.Enemies[enemyId].Die();
+                } else {
+                    this.Enemies[enemyId].SetTarget(this.map.enemyPath[this.Enemies[enemyId].targetId + 1]);
+                }
+            }
+    }
+
+    SpawnEnemy(){
+        if(this.Waves[this.WaveCount - 1].enemies.length > this.__waveEnemyId &&
+            this.Waves[this.WaveCount - 1].enemies[this.__waveEnemyId].spawnTick === this.WaveTick){
+            this.Enemies[this.__usedEnemyId] = this.Waves[this.WaveCount - 1]
+                .enemies[this.__waveEnemyId].enemy.constructor(this.map.enemyPath[0], this.map.enemyPath[1]);
+            this.Enemies[this.__usedEnemyId].health = Math.ceil(this.Waves[this.WaveCount - 1].multipleHp
+                * this.Enemies[this.__usedEnemyId].health);
+            this.__waveEnemyId++;
+            this.__usedEnemyId++;
+        }
+    }
+
+    CanStartWave(){
+        return this.__waveEnemyId === this.Waves[this.WaveCount - 1].enemies.length;
+    }
+
     StartWave() {
-        this.WaveTick = 0;
-        this.WaveCount++;
-        // TODO add Enemy
+        if(this.CanStartWave()) {
+            this.WaveTick = 0;
+            this.WaveCount++;
+            this.__waveEnemyId = 0;
+        }
     }
 
     togglePause() {

@@ -8,17 +8,6 @@
     z-index: 99;
 }
 
-.level-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-around;
-    flex-flow: wrap;
-}
-
 #resume, #exit {
     position: fixed;
     top: 50%;
@@ -41,5 +30,3 @@
 #resume {top: 40%}
 
 #exit {top: 60%}
-
-.game-canvas {position: absolute; left: 0; top: 0; height: 100%;}

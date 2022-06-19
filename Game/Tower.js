@@ -1,7 +1,8 @@
 import {DamageUpgrade, RadiusUpgrade, SpeedUpgrade} from "./Upgrade.js";
+import Bullet from "./Bullet.js"
 
 class Tower{
-    constructor(damage=1, radius=5, attackRadius = 25, attackSpeed = 10, position={X:0, Y: 0},) {
+    constructor(damage= 1, radius=5, attackRadius = 25, attackSpeed = 10, position={X:0, Y: 0},) {
         this.damage = damage;
         this.radius = radius;
         this.attackRadius = attackRadius;
@@ -14,18 +15,17 @@ class Tower{
     img = 'img.jpeg';
     recharge = 40;
 
-    CreateBullet() {
-        // TODO
+    CreateBullet(enemy) {
+        return new Bullet(enemy.position, 'bullet', this.damage, 5, this.position);
     }
 
     Attack(enemies) {
         for (let enemy of enemies) {
             if (this.IsInAttackRadius(enemy)){
-                this.CreateBullet();
-                return true;
+                return this.CreateBullet(enemy);
             }
         }
-        return false;
+        return null;
     }
 
     Upgrade(dmg, rds, spd) {
@@ -46,9 +46,13 @@ class Tower{
         if(this.__cd < 1000)
             this.__cd += this.attackSpeed;
         if(this.__cd >= 1000){
-            if(this.Attack(enemies))
+            let bullet = this.Attack(enemies);
+            if(bullet !== null){
                 this.__cd -= 1000;
+                return bullet;
+            }
         }
+        return null;
     }
 }
 

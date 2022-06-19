@@ -276,6 +276,10 @@
     -webkit-text-stroke-color: rgba(251, 55, 255, 0.2);
 }
 
+/*.tower-cost2 > h1{*/
+/*    text-shadow: 0px 0.729167px 0.947917px #990099, 0px 0.473958px 0.364583px rgba(77, 0, 66, 0.7);*/
+/*}*/
+
 .tower-cost3 {
     mix-blend-mode: hard-light;
     -webkit-text-stroke-width: 0.619792px;
@@ -307,6 +311,9 @@
     -webkit-text-stroke-width: 1.77396px;
     -webkit-text-stroke-color: rgba(51, 233, 198, 0.2);
 }
+/*.tower-info2 > h1 {*/
+/*    text-shadow: 0px 2.71552px 3.53018px #009999, 0px 1.77396px 1.36458px rgba(0, 77, 70, 0.7);*/
+/*}*/
 
 .tower-info3 {
     .tower-cost4d-mode: hard-light;
@@ -335,9 +342,14 @@
 }
 
 #pause-text2{
+    mix-blend-mode: hard-light;
     -webkit-text-stroke-width: 1.42188px;
     -webkit-text-stroke-color: rgba(255, 201, 64, 0.2);
 }
+
+/*#pause-text2 > h1 {*/
+/*    text-shadow: 0 2.1875px 2.84375px #8F7000, 0px 1.42188px 1.09375px rgba(57, 38, 0, 0.7);*/
+/*}*/
 
 #pause-text3 {
     mix-blend-mode: hard-light;
@@ -370,6 +382,10 @@
     -webkit-text-stroke-width: 1.84167px;
     -webkit-text-stroke-color: rgba(255, 0, 0, 0.2);
 }
+
+/*#restart-text2 {*/
+/*    text-shadow: 0px 2.83333px 3.68333px #CC3030, 0px 1.84167px 1.41667px rgba(38, 0, 0, 0.7);*/
+/*}*/
 
 #restart-text3 {
     mix-blend-mode: hard-light;

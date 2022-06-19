@@ -1,11 +1,12 @@
 export default class Enemy {
-    constructor(target, health=10, position={X:0, Y: 0}, speed = 1, radius = 5) {
+    constructor(position, target, health= 10, speed = 1, radius = 5) {
         this.health = health;
+        this.maxHealth = health;
         this.position = position;
         this.speed = speed;
         this.target = target;
         this.radius = radius;
-        this.targetId = 0;
+        this.targetId = 1;
         this.isLive = true
     };
 
@@ -25,8 +26,8 @@ export default class Enemy {
 
     TakeDamage(damage) {
         this.health -= damage;
-        if (this.health < 0)
-            this.health = 0;
+        if (this.health <= 0)
+            this.Die();
     }
 
     Die(){

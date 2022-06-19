@@ -21,6 +21,12 @@ export function addText(parentNode, text) {
     parentNode.appendChild(h);
 }
 
+export function getButton(parentNode, onClick, cls, id) {
+    let btn = getElement(parentNode, 'button', cls, id);
+    btn.addEventListener('click', onClick);
+    return btn;
+}
+
 export function getElement(parentNode, tag, cls, id) {
     let el = document.createElement(tag);
     if (cls !== undefined)

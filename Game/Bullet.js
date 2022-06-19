@@ -1,5 +1,5 @@
-class Bullets{
-    constructor(target, name='Bullet', damage=1,speed = 5, position={X:0, Y: 0}) {
+export default class Bullets{
+    constructor(target, name='Bullet', damage= 1,speed = 5, position={X:0, Y: 0}) {
         this.damage = damage;
         this.name = name;
         this.position = position;
@@ -18,6 +18,4 @@ class Bullets{
        // }
         return (Math.abs(target.X - this.position.X) + Math.abs(target.Y - this.position.Y)) < 1;
     }
-
-
 }
