@@ -1,4 +1,4 @@
-import Enemy from "./Enemy";
+import Enemy from "./Enemy.js";
 
 const defaultEnemies = [
     {enemy : Enemy, spawnTick : 20},

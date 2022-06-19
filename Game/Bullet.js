@@ -1,4 +1,4 @@
-class Bullets{
+export default class Bullets{
     constructor(target, name='Bullet', damage= 1,speed = 5, position={X:0, Y: 0}) {
         this.damage = damage;
         this.name = name;

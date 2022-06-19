@@ -1,6 +1,6 @@
 import Map from './Map.js'
 import Enemy from "./Enemy.js";
-import {DefaultWave} from "./Wave";
+import {DefaultWave} from "./Wave.js";
 
 const TowerRadius = 10;
 
