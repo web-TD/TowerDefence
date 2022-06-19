@@ -14,10 +14,10 @@ export default class Enemy {
     static img = 'enemy.jpeg';
 
     Move() {
-        let angle = Math.atan2(target.X - this.X, target.Y - this.Y);
-        this.position.X += speed * Math.cos(angle);
-        this.position.Y += speed * Math.sin(angle);
-        return (Math.abs(target.X - this.position.X) + Math.abs(target.Y - this.position.Y)) < 1;
+        let angle = Math.atan2(this.target.X - this.position.X, this.target.Y - this.position.Y);
+        this.position.X += this.speed * Math.cos(angle);
+        this.position.Y += this.speed * Math.sin(angle);
+        return (Math.abs(this.target.X - this.position.X) + Math.abs(this.target.Y - this.position.Y)) < 1;
     }
 
     SetTarget(target){
