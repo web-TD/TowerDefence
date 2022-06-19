@@ -30,7 +30,7 @@ export default class Game {
     }
 
     SetDefault(){
-        this.Money = 0;
+        this.Money = 20;
         this.Towers = [];
         this.Bullets = {};
         this.Enemies = {};
@@ -130,6 +130,8 @@ export default class Game {
         let enemiesToClear = [];
         for(let enemyId in this.Enemies)
             if(!this.Enemies[enemyId].isLive) {
+                if(this.Enemies[enemyId].health <= 0)
+                    this.Money += this.Enemies[enemyId].reward;
                 enemiesToClear.push(enemyId);
             }
         for(let id in enemiesToClear)

@@ -1,5 +1,5 @@
 export default class Enemy {
-    constructor(position, target, health= 10, speed = 1, radius = 5) {
+    constructor(position, target, health= 10, speed = 1, radius = 5, reward = 4) {
         this.health = health;
         this.maxHealth = health;
         this.position = position;
@@ -8,6 +8,7 @@ export default class Enemy {
         this.radius = radius;
         this.targetId = 1;
         this.isLive = true
+        this.reward = reward;
     };
 
     static img = 'enemy.jpeg';
