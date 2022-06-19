@@ -31,6 +31,8 @@ export default class SideMenu {
             this.nextPage.bind(this),
             'page-buttons',
             'next-page-button');
+        prevPageBtn.setAttribute('oncontextmenu', 'return false;');
+        nextPageBtn.setAttribute('oncontextmenu', 'return false;');
         nextPageBtn.maxPages = Math.ceil(towers.length / 4);
         let nextRects = getElement(pageButtons, 'div', 'page-rects', 'next-rects');
         let prevRects = getElement(pageButtons, 'div', 'page-rects', 'prev-rects');
@@ -50,7 +52,8 @@ export default class SideMenu {
         let shopRects = getElement(shop, 'div', 'shop-rects');
         for (let i = 0; i < pageItems.length; i++) {
             let item = pageItems[i];
-            let buyBtn = getButton(shop, this.buy.bind(this), 'buy-buttons', `buy-button${i}`);
+            let buyBtn = getButton(shop, this.buy.bind(document.onmousedown, item.name), 'buy-buttons', `buy-button${i}`);
+            buyBtn.setAttribute('oncontextmenu', 'return false;');
             let buyBtnRects = getElement(shopRects, 'div', `buy-rects`, `buy-rects${i}`);
             let towerInfoRects = getElement(buyBtnRects, 'div', `tower-info-rects`);
             let towerCostRects = getElement(buyBtnRects, 'div', 'tower-cost-rects');
@@ -67,7 +70,9 @@ export default class SideMenu {
     createControlButtons() {
         let controlButtons = getElement(this.sideMenu, 'div', 'controls');
         let pauseBtn = getButton(controlButtons, this.pause.bind(this), 'control-buttons', 'pause-button');
+        pauseBtn.setAttribute('oncontextmenu', 'return false;');
         let restartBtn = getButton(controlButtons, this.restart.bind(this), 'control-buttons', 'restart-button');
+        restartBtn.setAttribute('oncontextmenu', 'return false;');
         let pauseRects = getElement(controlButtons, 'div', 'control-rects', 'pause-rects');
         let restartRects = getElement(controlButtons, 'div', 'control-rects', 'restart-rects');
         let pauseText = getElement(controlButtons, 'div', 'control-texts', 'pause-texts');
@@ -82,45 +87,40 @@ export default class SideMenu {
         }
     }
 
-    getButton(parentNode, onClick, cls, id) {
-        let btn = getElement(parentNode, 'button', cls, id);
-        btn.addEventListener('click', onClick);
-        return btn;
-    }
-
-    buy (){
+    buy (TowerType, event) {
         let followCursor = (function() {
             let s = document.createElement('div');
-            s.setAttribute('id', 'followingImg');
+            s.setAttribute('id', 'following-tower');
             s.setAttribute('oncontextmenu', 'return false;');
-            s.style.position = 'absolute';
-            s.style.margin = '0';
-            s.style.padding = '5px';
-            s.textContent = "🚀"
-
+            s.style.background = `url("../assets/towers/${TowerType}.png")`;
             return {
-                init: function() {
-                    if(document.getElementById('followingImg') !== null)
-                        deleteDivByID('followingImg');
+                init: function(event, towerName) {
+                    if(document.getElementById('following-tower') !== null)
+                        deleteDivByID('following-tower');
+                    let e = event;
+                    s.style.left = (e.clientX - 50) + 'px';
+                    s.style.top = (e.clientY - 100) + 'px';
                     document.body.appendChild(s);
                 },
 
                 run: function(e) {
-                    s.style.left = (e.clientX - 5) + 'px';
-                    s.style.top = (e.clientY - 5) + 'px';
+                    s.style.left = (e.clientX - 50) + 'px';
+                    s.style.top = (e.clientY - 100) + 'px';
                 },
 
-                stop: function (e){
-                    if(document.getElementById('followingImg') !== null)
-                        deleteDivByID('followingImg');
+                stop: function (){
+                    if(document.getElementById('following-tower') !== null)
+                        deleteDivByID('following-tower');
                 }
             };
         }());
 
-        followCursor.init();
+        followCursor.init(event, TowerType);
         document.body.onmousemove = followCursor.run;
         document.body.oncontextmenu = followCursor.stop;
-        //symbol following added. todo add tower img follow with range
+        //tower image following added. todo add following with range and place tower
+        //document.body.onmousedown = (event) =>
+        //    {this.game.PlaceTower({X:event.clientX, Y:event.clientY}, TowerType); followCursor.stop();};
     }
 
     nextPage(event) {
