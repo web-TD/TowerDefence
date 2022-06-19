@@ -17,13 +17,20 @@ export default class GameField {
         this.context.clearRect(0, 0, this.w, this.h);
         this.drawMap();
         this.drawMapElements(this.game.Towers);
-        this.drawMapElements(this.game.Enemies);
-        this.drawMapElements(this.game.Bullets);
+        this.drawDictElements(this.game.Enemies);
+        this.drawDictElements(this.game.Bullets);
         this.updateData();
     }
 
     drawMapElements(elements) {
         for (let el in elements) {
+            this.drawMapElement(el, el.angle * Math.PI / 180);
+        }
+    }
+
+    drawDictElements(elements) {
+        for (let id in elements) {
+            let el = elements[id];
             this.drawMapElement(el, el.angle * Math.PI / 180);
         }
     }
