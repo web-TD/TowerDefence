@@ -1,4 +1,4 @@
-import {getElement} from "../utils.js";
+import {getElement, addText} from "../utils.js";
 
 export default class GameField {
     constructor(width, height, game) {
@@ -73,13 +73,6 @@ export default class GameField {
         this.time.firstChild.textContent = `Time: ${time}`;
     }
 
-    addText(parentNode) {
-        let h = document.createElement("h1");
-        let node = document.createTextNode('');
-        h.appendChild(node);
-        parentNode.appendChild(h);
-    }
-
     initGameField() {
         this.gameField = getElement(document.body, 'div', 'game-field');
         let gameData = getElement(this.gameField, 'div', 'data');
@@ -87,10 +80,10 @@ export default class GameField {
         this.waves = getElement(gameData, 'div', `waves`);
         this.money = getElement(gameData, 'div', `money`);
         this.time = getElement(gameData, 'div', `time`);
-        this.addText(this.health);
-        this.addText(this.waves);
-        this.addText(this.money);
-        this.addText(this.time);
+        addText(this.health);
+        addText(this.waves);
+        addText(this.money);
+        addText(this.time);
 
     }
 }

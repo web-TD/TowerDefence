@@ -1,22 +1,36 @@
 import GameField from "./GameField.js";
 import SideMenu from "./SideMenu.js";
-import {getElement} from "../utils.js";
+import {getElement, getButton, stackElements, addText} from "../utils.js";
 import Game from "../Game/Game.js";
 
 export default class LevelMenu {
     constructor() {
         this.levelMenu = getElement(document.body, 'div', 'level-menu');
+        this.stackCount = 5;
     }
 
-    foo() {
+    create() {
+        this.createHeader();
+        this.createLvlButtons();
+    }
+
+    createHeader() {
+        let headerContainer = getElement(this.levelMenu, 'div', 'header-container');
+        stackElements(headerContainer, 6, 'div', 'header', 'Tower defense', true);
+    }
+
+    createLvlButtons() {
+        let lvlButtonsRects = getElement(this.levelMenu, 'div', 'level-buttons-rects')
+        let lvlButtons = getElement(this.levelMenu, 'div', 'level-buttons');
         for (let i = 1; i <= 3; i++) {
-            let btn = document.createElement('button');
-            btn.innerText = `level ${i}`;
-            btn.style.width = '500px';
-            btn.style.height = '100px';
-            btn.lvl = i;
-            btn.addEventListener('click', this.startLevel.bind(this))
-            this.levelMenu.appendChild(btn);
+            let lvlButton = getButton(lvlButtons, this.startLevel.bind(this), `level-button`);
+            lvlButton.lvl = i;
+            let lvlButtonRects = getElement(lvlButtonsRects, 'div', 'level-button-rects');
+            let lvlInfoRects = getElement(lvlButtonRects, 'div', 'level-info-rects');
+            let lvlInfo = getElement(lvlButtonRects, 'div', 'level-info')
+            addText(lvlInfo, `Level ${i}`);
+            stackElements(lvlButtonRects, this.stackCount, 'div', 'level-button-rect');
+            stackElements(lvlInfoRects, this.stackCount, 'div', 'level-info-rect');
         }
     }
 

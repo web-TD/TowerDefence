@@ -3,6 +3,7 @@
     --vert-indent: 2.8%;
     --button-radius: 10px;
 }
+.game-canvas {position: absolute; left: 0; top: 0; height: 100%;}
 
 .game-field {
     position: absolute;
