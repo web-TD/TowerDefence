@@ -32,7 +32,7 @@ export default class Game {
     SetDefault(){
         this.Money = 0;
         this.Towers = [];
-        this.Bullets = [];
+        this.Bullets = {};
         this.Enemies = {};
         this.GlobalUpgrades = [];
         this.Waves = StandardWaves;
@@ -43,6 +43,7 @@ export default class Game {
         this.isPaused = false;
         this.__usedEnemyId = 0;
         this.__waveEnemyId = 0;
+        this.__bulletId = 0;
     }
 
     CanBuyTower(TowerType) {
@@ -93,15 +94,35 @@ export default class Game {
         if(this.WaveTick >= this.NextWaveTick)
             this.StartWave();
         this.MoveEnemies();
-        for(let bullet in this.Bullets)
-            bullet.Move();
+
+        let bulletToClear = []
+        for(let bulletId in this.Bullets)
+            if(this.Bullets[bulletId].Move()){
+                bulletToClear.push(bulletId);
+            }else{
+                for(let enemyId in this.Enemies){
+                    if(getDistance(this.Bullets[bulletId].position, this.Enemies[enemyId].position)
+                        < this.Enemies[enemyId].radius){
+                        bulletToClear.push(bulletId);
+                        this.Enemies[enemyId].TakeDamage(this.Bullets[bulletId].damage);
+                    }
+                }
+            }
+        for(let id in bulletToClear)
+            delete this.Bullets[id];
+
         this.ClearEnemies();
         this.SpawnEnemy();
         let enemies = [];
         for(let id in this.Enemies)
             enemies.push(this.Enemies[id]);
-        for(let tower in this.Towers)
-            tower.Tick(enemies);
+        for(let tower in this.Towers) {
+            let bullet = tower.Tick(enemies);
+            if(bullet !== null) {
+                this.Bullets[this.__bulletId] = bullet;
+                this.__bulletId++;
+            }
+        }
         this.WaveTick++;
     }
 
