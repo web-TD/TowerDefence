@@ -1,6 +1,5 @@
-import {getElement, deleteDivByID} from "../utils.js";
 import {Laser, Turret, MegaImba} from "../Game/Tower.js";
-import {getButton, getElement, clearDiv, stackElements} from "../utils.js";
+import {getButton, getElement, clearDiv, stackElements, deleteDivByID} from "../utils.js";
 import PauseMenu from "./PauseMenu.js";
 
 export default class SideMenu {
