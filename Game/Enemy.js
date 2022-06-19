@@ -9,9 +9,10 @@ export default class Enemy {
         this.targetId = 1;
         this.isLive = true
         this.reward = reward;
+        this.img = '../assets/enemies/enemy.png';
     };
 
-    static img = 'enemy.jpeg';
+    // static img = '../assets/enemies/enemy.png';
 
     Move() {
         let angle = Math.atan2(this.target.X - this.position.X, this.target.Y - this.position.Y);
@@ -20,7 +21,7 @@ export default class Enemy {
         return (Math.abs(this.target.X - this.position.X) + Math.abs(this.target.Y - this.position.Y)) < 1;
     }
 
-    SetTarget(target){
+    SetTarget(target) {
         this.target = target;
         this.targetId++;
     }
@@ -31,7 +32,7 @@ export default class Enemy {
             this.Die();
     }
 
-    Die(){
+    Die() {
         this.isLive = false;
     }
 }

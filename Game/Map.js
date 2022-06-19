@@ -3,11 +3,10 @@ export default class Map{
         levelNumber,
         width = 1920,
         height = 1080,
-        enemyPath = [{X:0, Y:0}, {X:1920, Y:1080}],
         pathRadius = 20) {
         this.width = width;
         this.height = height;
-        this.enemyPath = enemyPath;
+        this.enemyPath = [{X:150, Y:756}, {X:150, Y:400}, {X:850, Y:400}, {X:850, Y:50}];
         this.pathRadius = pathRadius;
         this.img = `assets/level_maps/${levelNumber}.png`;
     }
@@ -32,4 +31,5 @@ function distToSegmentSquared(p, v, w) {
     return dist2(p, { x: v.x + t * (w.x - v.x),
         y: v.y + t * (w.y - v.y) });
 }
+
 function distToSegment(p, v, w) { return Math.sqrt(distToSegmentSquared(p, v, w)); }

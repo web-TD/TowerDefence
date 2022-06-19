@@ -34,7 +34,6 @@ export default class Game {
         this.Towers = [];
         this.Bullets = {};
         this.Enemies = {};
-        this.GlobalUpgrades = [];
         this.Waves = StandardWaves;
         this.WaveCount = 0;
         this.WaveTick = 0;
@@ -120,7 +119,7 @@ export default class Game {
             enemies.push(this.Enemies[id]);
         for(let tower in this.Towers) {
             let bullet = tower.Tick(enemies);
-            if(bullet !== null) {
+            if (bullet !== null) {
                 this.Bullets[this.__bulletId] = bullet;
                 this.__bulletId++;
             }

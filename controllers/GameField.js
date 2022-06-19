@@ -16,9 +16,7 @@ export default class GameField {
     drawGameField() {
         this.context.clearRect(0, 0, this.w, this.h);
         this.drawMap();
-        this.drawMapElements(this.game.Towers);
         this.drawDictElements(this.game.Enemies);
-        this.drawDictElements(this.game.Bullets);
         this.updateData();
     }
 
@@ -38,23 +36,28 @@ export default class GameField {
     drawMapElement(el, angle) {
         let xScaling = this.w / this.game.map.width;
         let yScaling = this.h / this.game.map.height;
-        let topLeftCorner = {x: el.position.X - el.img.clientWidth, y: el.position.Y - el.img.clientHeight};
+        // let topLeftCorner = {x: el.position.X - el.img.clientWidth, y: el.position.Y - el.img.clientHeight};
         this.context.save();
         this.context.translate(this.w / 2, this.h / 2);
         this.context.rotate(angle);
-        this.context.drawImage(el.img, topLeftCorner.x * xScaling, topLeftCorner.y * yScaling);
+        this.drawImage(el);
         this.context.restore();
     }
 
     drawMap() {
-        this.drawImage(this.game.map.img);
-    }
-
-    drawImage(imgSource) {
         let img = new Image();
         let context = this.context;
-        img.src = imgSource;
+        img.src = this.game.map.img;
         context.drawImage(img, 0, 0, this.w, this.h);
+    }
+
+    drawImage(el) {
+        let img = new Image();
+        let context = this.context;
+        img.addEventListener('load', function () {
+            context.drawImage(img, el.position.X, el.position.Y);
+        })
+        img.src = el.img;
     }
 
     updateData(){
