@@ -1,4 +1,4 @@
-import {getElement} from "../utils.js";
+import {getElement, deleteDivByID} from "../utils.js";
 import {Laser, Turret, MegaImba} from "../Game/Tower.js";
 import {clearDiv, stackElements} from "../utils.js";
 import PauseMenu from "./PauseMenu.js";
@@ -89,9 +89,39 @@ export default class SideMenu {
         return btn;
     }
 
-    buy () {
-        alert("buy");
-        // todo implement
+    buy (){
+        let followCursor = (function() {
+            let s = document.createElement('div');
+            s.setAttribute('id', 'followingImg');
+            s.setAttribute('oncontextmenu', 'return false;');
+            s.style.position = 'absolute';
+            s.style.margin = '0';
+            s.style.padding = '5px';
+            s.textContent = "🚀"
+
+            return {
+                init: function() {
+                    if(document.getElementById('followingImg') !== null)
+                        deleteDivByID('followingImg');
+                    document.body.appendChild(s);
+                },
+
+                run: function(e) {
+                    s.style.left = (e.clientX - 5) + 'px';
+                    s.style.top = (e.clientY - 5) + 'px';
+                },
+
+                stop: function (e){
+                    if(document.getElementById('followingImg') !== null)
+                        deleteDivByID('followingImg');
+                }
+            };
+        }());
+
+        followCursor.init();
+        document.body.onmousemove = followCursor.run;
+        document.body.oncontextmenu = followCursor.stop;
+        //symbol following added. todo add tower img follow with range
     }
 
     nextPage(event) {

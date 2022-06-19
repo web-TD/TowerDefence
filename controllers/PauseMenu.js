@@ -47,6 +47,7 @@ export default class PauseMenu {
         deleteDivByClassName('game-canvas');
         deleteDivByClassName('side-menu');
         deleteDivByID('pauseMenu');
+        document.getElementsByClassName('level-menu')[0].style.visibility = 'visible';
     }
 
     getButton(id, text, onClick) {
