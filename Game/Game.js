@@ -30,7 +30,7 @@ export default class Game {
     }
 
     SetDefault(){
-        this.Money = 0;
+        this.Money = 20;
         this.Towers = [];
         this.Bullets = {};
         this.Enemies = {};
@@ -54,7 +54,7 @@ export default class Game {
         let fl1 =  this.map.getDistanceToPath(point) >= this.map.pathRadius + TowerRadius;
         let fl2 = true;
         for(let tower in this.Towers){
-            if(getDistance(point, tower.position) < TowerType.Radius + tower.Radius){
+            if(getDistance(point, tower.position) < TowerType.radius + tower.radius){
                 fl2 = false;
                 break;
             }
@@ -91,6 +91,8 @@ export default class Game {
     }
 
     GameTick() {
+        if(this.isPaused)
+            return;
         if(this.WaveTick >= this.NextWaveTick)
             this.StartWave();
         this.MoveEnemies();
@@ -130,6 +132,8 @@ export default class Game {
         let enemiesToClear = [];
         for(let enemyId in this.Enemies)
             if(!this.Enemies[enemyId].isLive) {
+                if(this.Enemies[enemyId].health <= 0)
+                    this.Money += this.Enemies[enemyId].reward;
                 enemiesToClear.push(enemyId);
             }
         for(let id in enemiesToClear)
@@ -149,11 +153,11 @@ export default class Game {
     }
 
     SpawnEnemy(){
-        if(this.Waves[this.WaveCount - 1].enemies.length > this.__waveEnemyId &&
-            this.Waves[this.WaveCount - 1].enemies[this.__waveEnemyId].spawnTick === this.WaveTick){
-            this.Enemies[this.__usedEnemyId] = this.Waves[this.WaveCount - 1]
-                .enemies[this.__waveEnemyId].enemy.constructor(this.map.enemyPath[0], this.map.enemyPath[1]);
-            this.Enemies[this.__usedEnemyId].health = Math.ceil(this.Waves[this.WaveCount - 1].multipleHp
+        if(this.Waves[this.WaveCount].enemies.length > this.__waveEnemyId &&
+            this.Waves[this.WaveCount].enemies[this.__waveEnemyId].spawnTick === this.WaveTick){
+            this.Enemies[this.__usedEnemyId] = new this.Waves[this.WaveCount]
+                .enemies[this.__waveEnemyId].enemy(this.map.enemyPath[0], this.map.enemyPath[1]);
+            this.Enemies[this.__usedEnemyId].health = Math.ceil(this.Waves[this.WaveCount].multipleHp
                 * this.Enemies[this.__usedEnemyId].health);
             this.__waveEnemyId++;
             this.__usedEnemyId++;
@@ -161,7 +165,7 @@ export default class Game {
     }
 
     CanStartWave(){
-        return this.__waveEnemyId === this.Waves[this.WaveCount - 1].enemies.length;
+        return this.__waveEnemyId === this.Waves[this.WaveCount].enemies.length;
     }
 
     StartWave() {

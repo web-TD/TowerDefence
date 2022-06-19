@@ -44,6 +44,7 @@ export default class LevelMenu {
         gameField.drawGameField();
         setInterval(function () {
             gameField.drawGameField();
+            game.GameTick();
         }, 10);
     }
 }

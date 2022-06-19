@@ -5,9 +5,8 @@ export default class Bullets{
         this.position = position;
         this.speed = speed;
         this._target = target;
+        this.img = 'bullet.jpeg';
     }
-
-    img = 'bullet.jpeg';
 
     Move(x, y){
         this.angle = Math.atan2(target.X - this.position.X, target.Y - this.position.Y);

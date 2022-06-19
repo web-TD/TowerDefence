@@ -10,10 +10,10 @@ class Tower{
         this.attackSpeed = attackSpeed; // выстрелов в тик / 1000
         this.upgrades = [DamageUpgrade(this), RadiusUpgrade(this), SpeedUpgrade(this)];
         this.__cd = 1000; // для отслеживания кд выстрела
+        this.img = 'img.jpeg';
     };
 
-    img = 'img.jpeg';
-    recharge = 40;
+    static recharge = 40;
 
     CreateBullet(enemy) {
         return new Bullet(enemy.position, 'bullet', this.damage, 5, this.position);
