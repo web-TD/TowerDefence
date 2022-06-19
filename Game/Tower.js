@@ -6,7 +6,7 @@ class Tower{
         this.damage = damage;
         this.radius = radius;
         this.attackRadius = attackRadius;
-        this.position = position;
+        this.position = {X:position.X, Y:position.Y};
         this.attackSpeed = attackSpeed; // выстрелов в тик / 1000
         this.upgrades = [DamageUpgrade(this), RadiusUpgrade(this), SpeedUpgrade(this)];
         this.__cd = 1000; // для отслеживания кд выстрела

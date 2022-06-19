@@ -2,7 +2,7 @@ export default class Enemy {
     constructor(position, target, health= 10, speed = 1, radius = 5, reward = 4) {
         this.health = health;
         this.maxHealth = health;
-        this.position = position;
+        this.position = {X:position.X, Y:position.Y};
         this.speed = speed;
         this.target = target;
         this.radius = radius;
@@ -15,7 +15,7 @@ export default class Enemy {
     // static img = '../assets/enemies/enemy.png';
 
     Move() {
-        let angle = Math.atan2(this.target.X - this.position.X, this.target.Y - this.position.Y);
+        let angle = Math.atan2(this.target.Y - this.position.Y,this.target.X - this.position.X);
         this.position.X += this.speed * Math.cos(angle);
         this.position.Y += this.speed * Math.sin(angle);
         return (Math.abs(this.target.X - this.position.X) + Math.abs(this.target.Y - this.position.Y)) < 1;
