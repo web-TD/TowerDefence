@@ -5,6 +5,13 @@
 }
 .game-canvas {position: absolute; left: 0; top: 0; height: 100%;}
 
+#following-tower{
+    position: absolute;
+    margin: 0;
+    width: 100px;
+    height: 200px;
+}
+
 .game-field {
     position: absolute;
     left: 0;
