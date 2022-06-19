@@ -9,9 +9,8 @@ export default class Enemy {
         this.targetId = 1;
         this.isLive = true
         this.reward = reward;
+        this.img = 'enemy.jpeg';
     };
-
-    static img = 'enemy.jpeg';
 
     Move() {
         let angle = Math.atan2(this.target.X - this.position.X, this.target.Y - this.position.Y);
