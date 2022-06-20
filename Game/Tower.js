@@ -2,7 +2,7 @@ import {DamageUpgrade, RadiusUpgrade, SpeedUpgrade} from "./Upgrade.js";
 import Bullet from "./Bullet.js"
 
 class Tower{
-    constructor(damage= 1, radius=10, position={X:0, Y: 0}, attackRadius = 25, attackSpeed = 10) {
+    constructor(damage= 1, radius=5, position={X:0, Y: 0}, attackRadius = 250, attackSpeed = 10) {
         this.damage = damage;
         this.radius = radius;
         this.attackRadius = attackRadius;
@@ -57,7 +57,7 @@ class Tower{
 
 export class Laser extends Tower {
     constructor(position) {
-        super(2, 25, position);
+        super(1, 25, position, 200, 500);
         this.img = '../assets/towers/laser.png';
     }
     static name = 'Laser';
@@ -68,7 +68,7 @@ export class Laser extends Tower {
 
 export class Turret extends Tower {
     constructor(position) {
-        super(1, 50, position);
+        super(10, 50, position);
         this.img = '../assets/towers/turret.png';
     }
     static name = 'Turret';
@@ -79,7 +79,7 @@ export class Turret extends Tower {
 
 export class MegaImba extends Tower {
     constructor(position) {
-        super(100, 1000, position);
+        super(100, 25, position);
         this.img = 'artemiy.jpeg';
     }
     static name = 'ArtemiyRogov';

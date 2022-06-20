@@ -5,7 +5,7 @@ export default class Bullets{
         this.position = {X:position.X, Y:position.Y};
         this.speed = speed;
         this._target = target;
-        this.img = 'bullet.jpeg';
+        this.img = '../assets/bullet.jpg';
     }
 
     Move(x, y){

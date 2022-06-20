@@ -17,6 +17,7 @@ export default class GameField {
         this.context.clearRect(0, 0, this.w, this.h);
         this.drawMap();
         this.drawDictElements(this.game.Enemies);
+        this.drawDictElements(this.game.Bullets);
         this.drawMapElements(this.game.Towers);
         this.updateData();
     }

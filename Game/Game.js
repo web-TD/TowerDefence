@@ -1,4 +1,5 @@
 import Map from './Map.js'
+import Enemy from "./Enemy.js";
 import {DefaultWave} from "./Wave.js";
 
 const StandardWaves = [
@@ -34,7 +35,7 @@ export default class Game {
         this.Waves = StandardWaves;
         this.WaveCount = 0;
         this.WaveTick = 0;
-        this.NextWaveTick = 60 * 120; // из предположения что в секунду произойдет 60 тиков
+        this.NextWaveTick = 60 * 50; // из предположения что в секунду произойдет 60 тиков
         this.PlayerHealth = 20;
         this.isPaused = false;
         this.__usedEnemyId = 0;
@@ -114,8 +115,8 @@ export default class Game {
         let enemies = [];
         for(let id in this.Enemies)
             enemies.push(this.Enemies[id]);
-        for(let tower in this.Towers) {
-            let bullet = tower.Tick(enemies);
+        for(let id in this.Towers) {
+            let bullet = this.Towers[id].Tick(enemies);
             if (bullet !== null) {
                 this.Bullets[this.__bulletId] = bullet;
                 this.__bulletId++;
