@@ -127,8 +127,7 @@ export default class SideMenu {
         document.body.onmousedown = (event) => {
             if (isPlacing){
                 followCursor.stop();
-                this.game.PlaceTower({X: event.clientX, Y: event.clientY}, towertype);
-                console.log(event.clientX);
+                this.game.PlaceTower({X: event.clientX - 50, Y: event.clientY - 100}, towertype);
             }
         };
     }

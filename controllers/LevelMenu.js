@@ -48,6 +48,6 @@ export default class LevelMenu {
 
         setInterval(function () {
             game.GameTick();
-        }, 17)
+        }, 17);
     }
 }

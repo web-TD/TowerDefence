@@ -49,7 +49,7 @@ export default class Game {
     CanPlaceTower(point, TowerType) {
         let fl1 =  this.map.getDistanceToPath(point) >= this.map.pathRadius + TowerType.staticRadius;
         let fl2 = true;
-        for(let tower in this.Towers) {
+        for(let tower of this.Towers) {
             if(getDistance(point, tower.position) < TowerType.staticRadius + tower.radius){
                 fl2 = false;
                 break;
