@@ -82,6 +82,6 @@ export class MegaImba extends Tower {
         this.img = 'artemiy.jpeg';
     }
     static name = 'ArtemiyRogov';
-    static cost = 100000;
+    static cost = 100;
     static shopImg = 'artemiy_shop.jpeg';
 }

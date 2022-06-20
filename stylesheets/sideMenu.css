@@ -83,7 +83,7 @@
 
 .tower-cost-rects, .tower-costs {
     position: absolute;
-    width: 16%;
+    width: 30%;
     height: 0;
     padding-bottom: 16%;
     border-radius: var(--button-radius);

@@ -18,7 +18,7 @@ export default class SideMenu {
     }
 
     createShop() {
-        let towers = [Laser, Turret, MegaImba, Laser, Laser].sort((a, b) => {return a.cost - b.cost});
+        let towers = [Laser, Turret, MegaImba].sort((a, b) => {return a.cost - b.cost});
         this.createShopPage(towers);
         let pageButtons = getElement(this.sideMenu, 'div', 'pages');
         let prevPageBtn = getButton(
