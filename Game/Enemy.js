@@ -1,3 +1,5 @@
+import {getImage} from "../utils.js";
+
 export default class Enemy {
     constructor(position, target, health= 10, speed = 1, radius = 5, reward = 4) {
         this.health = health;
@@ -9,10 +11,10 @@ export default class Enemy {
         this.targetId = 1;
         this.isLive = true
         this.reward = reward;
-        this.img = '../assets/enemies/enemy.png';
+        this.img = getImage('../assets/enemies/enemy.png');
     };
 
-    static img = '../assets/enemies/enemy.png';
+    // static img = '../assets/enemies/enemy.png';
 
     Move() {
         let angle = Math.atan2(this.target.Y - this.position.Y,this.target.X - this.position.X);

@@ -1,3 +1,5 @@
+import {getImage} from "../utils.js";
+
 export default class Bullets{
     constructor(target, name='Bullet', damage= 1,speed = 5, position={X:0, Y: 0}) {
         this.damage = damage;
@@ -5,7 +7,7 @@ export default class Bullets{
         this.position = {X:position.X, Y:position.Y};
         this.speed = speed;
         this._target = target;
-        this.img = '../assets/bullet.jpg';
+        this.img = getImage('../assets/bullet.jpg');
     }
 
     Move(x, y){

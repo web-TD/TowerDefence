@@ -1,3 +1,5 @@
+import {getImage} from "../utils.js";
+
 export default class Map{
     constructor(
         levelNumber,
@@ -8,7 +10,7 @@ export default class Map{
         this.height = height;
         this.enemyPath = [{X:235, Y:756}, {X:235, Y:335}, {X:775, Y:335}, {X:775, Y:50}];
         this.pathRadius = pathRadius;
-        this.img = `assets/level_maps/${levelNumber}.png`;
+        this.img = getImage(`../assets/level_maps/${levelNumber}.png`);
     }
 
     getDistanceToPath(point){

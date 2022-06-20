@@ -1,5 +1,6 @@
 import {DamageUpgrade, RadiusUpgrade, SpeedUpgrade} from "./Upgrade.js";
 import Bullet from "./Bullet.js"
+import {getImage} from "../utils.js";
 
 class Tower{
     constructor(damage= 1, radius=5, position={X:0, Y: 0}, attackRadius = 250, attackSpeed = 10) {
@@ -58,7 +59,7 @@ class Tower{
 export class Laser extends Tower {
     constructor(position) {
         super(1, 25, position, 200, 500);
-        this.img = '../assets/towers/laser.png';
+        this.img = getImage('../assets/towers/laser.png');
     }
     static name = 'Laser';
     static cost = 20;
@@ -69,7 +70,7 @@ export class Laser extends Tower {
 export class Turret extends Tower {
     constructor(position) {
         super(10, 50, position);
-        this.img = '../assets/towers/turret.png';
+        this.img = getImage('../assets/towers/turret.png');
     }
     static name = 'Turret';
     static cost = 10;

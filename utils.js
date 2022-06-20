@@ -37,6 +37,12 @@ export function getElement(parentNode, tag, cls, id) {
     return el;
 }
 
+export function getImage(src) {
+    let img = new Image();
+    img.src = src
+    return img;
+}
+
 export function getTextSize(ctx, text) {
     let metrics = ctx.measureText(text);
     let height = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
