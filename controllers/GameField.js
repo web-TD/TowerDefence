@@ -16,12 +16,13 @@ export default class GameField {
     drawGameField() {
         this.context.clearRect(0, 0, this.w, this.h);
         this.drawMap();
+        this.drawMapElements(this.game.Towers);
         this.drawDictElements(this.game.Enemies);
         this.updateData();
     }
 
     drawMapElements(elements) {
-        for (let el in elements) {
+        for (let el of elements) {
             this.drawMapElement(el, el.angle * Math.PI / 180);
         }
     }
@@ -52,6 +53,7 @@ export default class GameField {
     }
 
     drawImage(el) {
+
         let img = new Image();
         let context = this.context;
         img.addEventListener('load', function () {

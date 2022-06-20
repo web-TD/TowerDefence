@@ -128,6 +128,7 @@ export default class SideMenu {
             if (isPlacing){
                 followCursor.stop();
                 this.game.PlaceTower({X: event.clientX, Y: event.clientY}, towertype);
+                console.log(event.clientX);
             }
         };
     }

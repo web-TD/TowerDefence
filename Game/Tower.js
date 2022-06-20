@@ -2,7 +2,7 @@ import {DamageUpgrade, RadiusUpgrade, SpeedUpgrade} from "./Upgrade.js";
 import Bullet from "./Bullet.js"
 
 class Tower{
-    constructor(damage= 1, radius=5, attackRadius = 25, attackSpeed = 10, position={X:0, Y: 0},) {
+    constructor(damage= 1, radius=5, position={X:0, Y: 0}, attackRadius = 25, attackSpeed = 10) {
         this.damage = damage;
         this.radius = radius;
         this.attackRadius = attackRadius;
@@ -10,7 +10,6 @@ class Tower{
         this.attackSpeed = attackSpeed; // выстрелов в тик / 1000
         //this.upgrades = [DamageUpgrade(this), RadiusUpgrade(this), SpeedUpgrade(this)];
         this.__cd = 1000; // для отслеживания кд выстрела
-        this.img = 'img.jpeg';
     };
 
     static recharge = 40;
@@ -59,7 +58,7 @@ class Tower{
 export class Laser extends Tower {
     constructor(position) {
         super(2, 25, position);
-        this.img = 'laser.jpeg';
+        this.img = '../assets/towers/laser.png';
     }
     static name = 'Laser';
     static cost = 20;
@@ -69,7 +68,7 @@ export class Laser extends Tower {
 export class Turret extends Tower {
     constructor(position) {
         super(1, 50, position);
-        this.img = 'turret.jpeg';
+        this.img = '../assets/towers/turret.png';
     }
     static name = 'Turret';
     static cost = 10;

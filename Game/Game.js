@@ -63,7 +63,7 @@ export default class Game {
 
     PlaceTower(point, TowerType) {
         if(this.CanPlaceTower(point, TowerType) && this.CanBuyTower(TowerType)){
-            this.Towers.push(TowerType.constructor(point));
+            this.Towers.push(new TowerType(point));
             this.Money -= TowerType.cost;
             return true;
         }
