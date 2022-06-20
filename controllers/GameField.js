@@ -58,7 +58,7 @@ export default class GameField {
         this.fillHealth(this.game.PlayerHealth);
         this.fillWaves(this.game.WaveCount);
         this.fillMoney(this.game.Money);
-        this.fillTime((Math.ceil((this.game.WaveTick + this.game.WaveCount * this.game.NextWaveTick)/60)).toString());
+        this.fillTime((Math.ceil((this.game.WaveTick + this.game.WaveCount * this.game.NextWaveTick)/180)).toString());
     }
 
     fillHealth(health) {
