@@ -9,12 +9,12 @@ export default class Bullets{
     }
 
     Move(x, y){
-        this.angle = Math.atan2(target.X - this.position.X, target.Y - this.position.Y);
-        this.position.X += speed * Math.cos(this.angle);
-        this.position.Y += speed * Math.sin(this.angle);
+        this.angle = Math.atan2(this._target.Y - this.position.Y, this._target.X - this.position.X);
+        this.position.X += this.speed * Math.cos(this.angle);
+        this.position.Y += this.speed * Math.sin(this.angle);
         //if(Math.abs(target.X - this.position.X) + Math.abs(target.Y - this.position.Y) < 1){
 
        // }
-        return (Math.abs(target.X - this.position.X) + Math.abs(target.Y - this.position.Y)) < 1;
+        return (Math.abs(this._target.X - this.position.X) + Math.abs(this._target.Y - this.position.Y)) < 1;
     }
 }
