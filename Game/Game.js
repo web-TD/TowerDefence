@@ -110,7 +110,7 @@ export default class Game {
                 }
             }
         for(let id in bulletToClear)
-            delete this.Bullets[id];
+            delete this.Bullets[bulletToClear[id]];
 
         this.ClearEnemies();
         this.SpawnEnemy();
@@ -136,7 +136,7 @@ export default class Game {
                 enemiesToClear.push(enemyId);
             }
         for(let id in enemiesToClear)
-            delete this.Enemies[id];
+            delete this.Enemies[enemiesToClear[id]];
     }
 
     MoveEnemies(){
