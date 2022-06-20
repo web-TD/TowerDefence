@@ -52,7 +52,8 @@ export default class SideMenu {
         let shopRects = getElement(shop, 'div', 'shop-rects');
         for (let i = 0; i < pageItems.length; i++) {
             let item = pageItems[i];
-            let buyBtn = getButton(shop, this.buy.bind(document.onmousedown, item.name), 'buy-buttons', `buy-button${i}`);
+            let buyBtn = getButton(shop, this.buy.bind(this), 'buy-buttons', `buy-button${i}`);
+            buyBtn.towerType = item;
             buyBtn.setAttribute('oncontextmenu', 'return false;');
             let buyBtnRects = getElement(shopRects, 'div', `buy-rects`, `buy-rects${i}`);
             let towerInfoRects = getElement(buyBtnRects, 'div', `tower-info-rects`);
@@ -87,19 +88,22 @@ export default class SideMenu {
         }
     }
 
-    buy (TowerType, event) {
+    buy (event) {
+        let towertype = event.currentTarget.towerType;
+        let isPlacing = false;
         let followCursor = (function() {
             let s = document.createElement('div');
             s.setAttribute('id', 'following-tower');
             s.setAttribute('oncontextmenu', 'return false;');
-            s.style.background = `url("../assets/towers/${TowerType}.png")`;
+            s.style.background = `url("../assets/towers/${event.currentTarget.towerType.name}.png")`;
             return {
-                init: function(event, towerName) {
+                init: function(event) {
                     if(document.getElementById('following-tower') !== null)
                         deleteDivByID('following-tower');
                     let e = event;
                     s.style.left = (e.clientX - 50) + 'px';
                     s.style.top = (e.clientY - 100) + 'px';
+                    isPlacing = true;
                     document.body.appendChild(s);
                 },
 
@@ -109,18 +113,23 @@ export default class SideMenu {
                 },
 
                 stop: function (){
+                    isPlacing = false;
                     if(document.getElementById('following-tower') !== null)
                         deleteDivByID('following-tower');
                 }
             };
         }());
 
-        followCursor.init(event, TowerType);
+        followCursor.init(event);
         document.body.onmousemove = followCursor.run;
         document.body.oncontextmenu = followCursor.stop;
         //tower image following added. todo add following with range and place tower
-        //document.body.onmousedown = (event) =>
-        //    {this.game.PlaceTower({X:event.clientX, Y:event.clientY}, TowerType); followCursor.stop();};
+        document.body.onmousedown = (event) => {
+            if (isPlacing){
+                followCursor.stop();
+                this.game.PlaceTower({X: event.clientX, Y: event.clientY}, towertype);
+            }
+        };
     }
 
     nextPage(event) {
