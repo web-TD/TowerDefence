@@ -27,10 +27,12 @@ export default class LevelMenu {
             lvlButton.lvl = i;
             let lvlButtonRects = getElement(lvlButtonsRects, 'div', 'level-button-rects');
             let lvlInfoRects = getElement(lvlButtonRects, 'div', 'level-info-rects');
-            let lvlPreview = getElement(lvlButtonRects, 'div', `level-preview`);
-            let image = getElement(lvlPreview,'img', 'level-preview-image');
-            if(i !== 3)
-                image.src=`assets/level_maps/${i}.png`;
+
+            if(i !== 3) {
+                let lvlPreview = getElement(lvlButtonRects, 'div', `level-preview`);
+                let image = getElement(lvlPreview,'img', 'level-preview-image');
+                image.src = `assets/level_maps/${i}.png`;
+            }
             let lvlInfo = getElement(lvlButtonRects, 'div', 'level-info')
             addText(lvlInfo, `Level ${i}`);
             stackElements(lvlButtonRects, this.stackCount, 'div', 'level-button-rect');
