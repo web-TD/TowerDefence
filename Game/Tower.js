@@ -59,7 +59,7 @@ class Tower{
 export class Laser extends Tower {
     constructor(position) {
         super(1, 25, position, 200, 500);
-        this.img = getImage('../assets/towers/laser.png');
+        this.img = getImage('../assets/towers/Laser.png');
     }
     static name = 'Laser';
     static cost = 20;
@@ -70,7 +70,7 @@ export class Laser extends Tower {
 export class Turret extends Tower {
     constructor(position) {
         super(10, 50, position);
-        this.img = getImage('../assets/towers/turret.png');
+        this.img = getImage('../assets/towers/Turret.png');
     }
     static name = 'Turret';
     static cost = 10;
