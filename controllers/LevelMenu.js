@@ -46,12 +46,14 @@ export default class LevelMenu {
         let sideMenu = new SideMenu(game);
         sideMenu.showSideMenu();
         gameField.drawGameField();
-        setInterval(function () {
+        let ticId = 0;
+        ticId = setInterval(function () {
             gameField.drawGameField();
-        }, 17);
-
-        setInterval(function () {
             game.GameTick();
-        }, 17);
+            if(game.WaveCount === 15 || game.PlayerHealth <= 0){
+                clearInterval(ticId);
+                sideMenu.pauseMenu.exit();
+            }
+        }, 6);
     }
 }
