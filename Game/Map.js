@@ -8,7 +8,7 @@ export default class Map{
         pathRadius = 20) {
         this.width = width;
         this.height = height;
-        this.enemyPath = [{X:235, Y:756}, {X:235, Y:335}, {X:775, Y:335}, {X:775, Y:50}];
+        this.enemyPath = [{X:290, Y:1080}, {X:290, Y:500}, {X:940, Y:500}, {X:940, Y:0}];
         this.pathRadius = pathRadius;
         this.img = getImage(`../assets/level_maps/${levelNumber}.png`);
     }
