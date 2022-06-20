@@ -1,8 +1,5 @@
 import Map from './Map.js'
-import Enemy from "./Enemy.js";
 import {DefaultWave} from "./Wave.js";
-
-const TowerRadius = 10;
 
 const StandardWaves = [
     new DefaultWave("1", 1),
@@ -50,10 +47,10 @@ export default class Game {
     }
 
     CanPlaceTower(point, TowerType) {
-        let fl1 =  this.map.getDistanceToPath(point) >= this.map.pathRadius + TowerRadius;
+        let fl1 =  this.map.getDistanceToPath(point) >= this.map.pathRadius + TowerType.staticRadius;
         let fl2 = true;
-        for(let tower in this.Towers){
-            if(getDistance(point, tower.position) < TowerType.radius + tower.radius){
+        for(let tower in this.Towers) {
+            if(getDistance(point, tower.position) < TowerType.staticRadius + tower.radius){
                 fl2 = false;
                 break;
             }

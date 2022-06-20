@@ -12,7 +12,7 @@ export default class Enemy {
         this.img = '../assets/enemies/enemy.png';
     };
 
-    // static img = '../assets/enemies/enemy.png';
+    static img = '../assets/enemies/enemy.png';
 
     Move() {
         let angle = Math.atan2(this.target.Y - this.position.Y,this.target.X - this.position.X);
